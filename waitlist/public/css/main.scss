@@ -1,4 +1,5 @@
 @import 'reset';
+@import 'animate';
 @import url('https://fonts.googleapis.com/css?family=Major+Mono+Display');
 
 $background: #4fc3f7;
@@ -10,11 +11,19 @@ $bigFont: 'Major Mono Display', monospace;
 
 body {
    background: $background;
+   background: -webkit-linear-gradient(top left, $background, lighten($background, 10%));
+   background: -moz-linear-gradient(top left, $background, lighten($background, 10%));
+   background: linear-gradient(top left, $background, lighten($background, 10%));
    overflow: hidden;
+   height: 100vh;
 }
 
 .background {
    position: absolute;
+
+   i {
+      text-shadow: 0 0 5px #0072;
+   }
 
    i.fa-cloud {
       position: absolute;
@@ -55,7 +64,7 @@ body {
       font-size: 60px;
    }
    
-   input {
+   input, p#submit {
       color: $text;
       font-family: $bigFont;
       background: none;
@@ -66,7 +75,14 @@ body {
    }
 
    #submit {
+      cursor: pointer;
       display: none;
+      text-shadow: 0 0 0 #0004;
+      transition: text-shadow 0.3s;
+
+      &:hover {
+         text-shadow: 0 0 20px #0078;
+      }
    }
 }
 

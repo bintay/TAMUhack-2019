@@ -1,0 +1,97 @@
+@import 'reset';
+@import url('https://fonts.googleapis.com/css?family=Major+Mono+Display');
+
+$background: #4fc3f7;
+$text: #fafafa;
+
+$cloudColor: #fff;
+
+$bigFont: 'Major Mono Display', monospace;
+
+body {
+   background: $background;
+   overflow: hidden;
+}
+
+.background {
+   position: absolute;
+
+   i.fa-cloud {
+      position: absolute;
+      color: $cloudColor;
+      font-size: 80px;
+      display: block;
+
+      @for $i from 1 through 6 {
+         &:nth-child(#{$i}) {
+            top: 230px * $i - 210px;
+            animation: rightToLeft 40s infinite;
+            animation-delay: -$i * 15s;
+            animation-timing-function: linear;
+         }
+      }
+   }
+
+   i.fa-plane {
+      position: absolute;
+      font-size: 100px;
+      color: darken($cloudColor, 10%);
+      animation: upDown 10s infinite;
+      animation-timing-function: ease-in-out;
+      left: calc(50vw - 50px);
+      top: 400px;
+   }
+}
+
+.center {
+   text-align: center;
+   margin: 0 auto;
+   padding-top: 100px;
+   width: 100%;
+
+   h1 {
+      color: $text;
+      font-family: $bigFont;
+      font-size: 60px;
+   }
+   
+   input {
+      color: $text;
+      font-family: $bigFont;
+      background: none;
+      border: none;
+      outline: none;
+      width: 200px;
+      font-size: 60px;
+   }
+
+   #submit {
+      display: none;
+   }
+}
+
+
+@keyframes rightToLeft {
+   0% {
+      left: 100vw;
+   }
+
+   100% {
+      left: -10vw;
+   }
+}
+
+
+@keyframes upDown {
+   0% {
+      margin-top: -20px;
+   }
+
+   50% {
+      margin-top: 20px;
+   }
+
+   100% {
+      margin-top: -20px;
+   }
+}

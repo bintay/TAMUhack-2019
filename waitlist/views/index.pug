@@ -25,12 +25,28 @@ html
          a(href='/') try again
       .dashboard
          .info
+            h2 flight information
             p <span class='label'>Departure</span><span class='departure'>0:00 pm</span>
+            br
             p <span class='label'>Arrival</span><span class='arrival'>0:00 pm</span>
+            br
             p <span class='label'>Time Remaining</span><span class='timeleft'>0 Hours, 0 Minutes</span>
+            br
+            p <span class='label'>Weather in <span class='cityFrom'></span></span><span class='weatherFrom'></span>
+            br
+            p <span class='label'>Weather in <span class='cityTo'></span></span><span class='weatherTo'></span>
          .contact
             p TEMP CONTACT HERE
          .bathroom
-            p TEMP BATHROOM LINE HERE
+            h2 bathroom
+            label.label Seat
+            input(id='seatNumber', type='text', name='seatNumber', value='', placeholder='Seat')
+            br
+            br
+            p <span class='label'>Estimated wait time</span> &lt; <span class='bathroomWait'>0</span> minutes
+            br
+            p.button.queue Join queue
       script(src="https://code.jquery.com/jquery-3.3.1.min.js", integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=", crossorigin="anonymous")
+      script(src="/public/js/air-port-codes-api-min.js")
       script(src='/public/js/main.js')
+

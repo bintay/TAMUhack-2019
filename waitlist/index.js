@@ -37,7 +37,7 @@ app.get('/bathroom/wait/:flight/:seat', function (req, res) {
       }
    }
    if (index == -1) {
-      res.send(JSON.stringify({ time: flights[req.params.flight].length * 5}));
+      res.send(JSON.stringify({ time: flights[req.params.flight].length * 3}));
    } else {
       res.send(JSON.stringify({ time: index * 5}));
    }

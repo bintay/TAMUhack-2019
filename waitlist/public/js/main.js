@@ -57,28 +57,7 @@
             $('.dashboard').addClass('animated zoomIn');
             $('.dashboard').css('display', 'grid');
 
-            // get times
-            let departureTimeDate = new Date(flight.estimatedDepartureTime);
-            let arrivalTimeDate = new Date(flight.estimatedArrivalTime);
-
-            let departureTime = departureTimeDate.toLocaleTimeString();
-            let arrivalTime = arrivalTimeDate.toLocaleTimeString();
-
-            // remove seconds on time
-            departureTime = departureTime.substring(0, 4) + departureTime.substring(7, 10);
-            arrivalTime = arrivalTime.substring(0, 4) + arrivalTime.substring(7, 10);
-
-            let currentTime = new Date();
-
-            // time until we arrive
-            let msTillArrival = arrivalTimeDate - currentTime;
-            let minutes = Math.floor(((msTillArrival / 1000) / 60) % 60);
-            let hours = Math.floor(((msTillArrival / 1000) / 60) / 60);
-
-            // update text
-            $('span.departure').text(departureTime);
-            $('span.arrival').text(arrivalTime);
-            $('span.timeleft').text(`${hours} Hour${hours == 1 ? '' : 's'}, ${minutes} Minute${minutes == 1 ? '' : 's'}`);
+            setInterval(updateTimes(flight), 30000);
          }, 1000);
       }).fail((res) => {
          setTimeout(() => {
@@ -111,6 +90,7 @@
                });
             }
          }
+         updateWaitTime(flightNumber);
       });
 
       updateWaitTime(flightNumber);
@@ -129,11 +109,44 @@
 
    function updateWaitTime (flightNumber) {
       let seat = $('#seatNumber').val();
-      if (seat.length == 0) {
-         let seat = '***';
+      if (seat == null || seat.length == 0) {
+         seat = '***';
       }
       $.get(`http://localhost:32100/bathroom/wait/${flightNumber}/${seat}`, (data) => {
-         $('span.bathroomWait').text(data.time);
+         if (data.time == '0' && $('.button.queue').text() == 'Exit queue') {
+            alert('IT\'S POTTY TIME 💩');
+            $('.button.queue').text('I\'m done!');
+            $('span.bathroomWait').text('Your turn');
+         } else if (data.time == '0' && $('.button.queue').text() == 'I\'m done!') {
+            $('span.bathroomWait').text('Your turn');
+         } else {
+            $('span.bathroomWait').text('< ' + data.time + ' minutes');
+         }
       });
+   }
+
+   function updateTimes (flight) {
+      // get times
+      let departureTimeDate = new Date(flight.estimatedDepartureTime);
+      let arrivalTimeDate = new Date(flight.estimatedArrivalTime);
+
+      let departureTime = departureTimeDate.toLocaleTimeString();
+      let arrivalTime = arrivalTimeDate.toLocaleTimeString();
+
+      // remove seconds on time
+      departureTime = departureTime.substring(0, 4) + departureTime.substring(7, 10);
+      arrivalTime = arrivalTime.substring(0, 4) + arrivalTime.substring(7, 10);
+
+      let currentTime = new Date();
+
+      // time until we arrive
+      let msTillArrival = arrivalTimeDate - currentTime;
+      let minutes = Math.floor(((msTillArrival / 1000) / 60) % 60);
+      let hours = Math.floor(((msTillArrival / 1000) / 60) / 60);
+
+      // update text
+      $('span.departure').text(departureTime);
+      $('span.arrival').text(arrivalTime);
+      $('span.timeleft').text(`${hours} Hour${hours == 1 ? '' : 's'}, ${minutes} Minute${minutes == 1 ? '' : 's'}`);
    }
 })();

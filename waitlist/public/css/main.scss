@@ -102,19 +102,47 @@ body {
    grid-template-columns: 10% 37.5% 5% 37.5% 10%;
    grid-template-rows: 5vh 42.5vh 5vh 42.5vh 5vh;
 
-   p {
+   p, label {
       font-family: $littleFont;
+   }
+
+   h2 {
+      font-family: $bigFont;
+      padding-bottom: 30px;
+      font-size: 30px;
+   }
+
+   .button {
+      display: block;
+      padding: 10px;
+      margin: 0 auto;
+      background: #222;
+      color: #fff;
+      text-align: center;
+      transition: background 0.3s;
+      cursor: pointer;
+
+      &:hover {
+         background: $background;
+      }
+   }
+
+   .info, .contact, .bathroom {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #0005;
+      padding: 20px;
+
+      .label {
+         display: inline-block;
+         width: 200px;
+      }
    }
 
    .info {
       grid-column-start: 2;
       grid-column-end: 3;
       grid-row: 2;
-
-      .label {
-         display: inline-block;
-         width: 150px;
-      }
    }
 
    .contact {

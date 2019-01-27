@@ -38,6 +38,8 @@ html
          .contact
             #textbox
                input#chat(type='text', name='chat', value='', placeholder='Need anything? Let us know.')
+               i.mic.fas.fa-microphone
+               i.stop.fas.fa-stop(style='display:none')
                p#send send
             .clear
             #messages
@@ -57,5 +59,6 @@ html
       script(src="https://code.jquery.com/jquery-3.3.1.min.js", integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=", crossorigin="anonymous")
       script(src="public/js/socket.io.js")
       script(src="/public/js/air-port-codes-api-min.js")
+      script(src="https://cdn.WebRTC-Experiment.com/RecordRTC.js")
       script(src='/public/js/main.js')
 

@@ -150,6 +150,44 @@ function cateogrize (text, callback) {
    });
 }
 
+// speech
+// 7dc8c8641a3a432ca88a23328a7f0b10
+var multer  = require('multer');
+var upload = multer({ dest: __dirname + '/public/uploads/' });
+var type = upload.single('data');
+var exec = require('child_process').exec;
+var fs = require('fs');
+var speechSdk = require('microsoft-cognitiveservices-speech-sdk');
+
+app.post('/speech/', type, function (req, res) {
+   console.log(req.file);
+   exec('ffmpeg -i ' + path.join(__dirname, 'public/uploads/' + req.file.filename + ' ' + path.join(__dirname, 'public/uploads/' + req.file.filename + '.wav')), function(err, stdout, stderr) {
+      let pushStream = speechSdk.AudioInputStream.createPushStream();
+
+      fs.createReadStream(path.join(__dirname, 'public/uploads/' + req.file.filename + '.wav')).on('data', function (arrayBuffer) {
+         pushStream.write(arrayBuffer.buffer);
+      }).on('end', function () {
+         pushStream.close();
+         console.log('looking at file');
+
+         let audioConfig = speechSdk.AudioConfig.fromStreamInput(pushStream);
+         let speechConfig = speechSdk.SpeechConfig.fromSubscription('7dc8c8641a3a432ca88a23328a7f0b10', 'westus');
+         speechConfig.outputFormat = 1;
+         speechConfig.speechRecognitionLanguage = 'hi-IN';
+
+         let recognizer = new speechSdk.SpeechRecognizer(speechConfig, audioConfig);
+         recognizer.recognizeOnceAsync(function (speechToText) {
+            console.log(speechToText);
+            res.end(JSON.stringify(speechToText));
+            recognizer.close();
+         }, function (err) {
+            console.log('err - ' + err);
+            recognizer.close();
+         });
+      });
+   });
+});
+
 // Start the server
 http.listen(PORT, function () {
    console.log(`App listening on port ${PORT}.`);

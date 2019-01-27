@@ -2601,9 +2601,14 @@ body {
     .dashboard #textbox #chat {
       display: block;
       float: left;
-      width: 80%;
+      width: 70%;
       margin: 0 2%;
       padding: 10px; }
+    .dashboard #textbox i {
+      float: left;
+      margin-right: 2%;
+      margin-top: 4px;
+      font-size: 30px; }
     .dashboard #textbox #send {
       display: block;
       width: 5%;
@@ -2619,7 +2624,8 @@ body {
       clear: both; }
   .dashboard #messages {
     overflow-y: scroll;
-    height: 80%; }
+    height: 80%;
+    min-height: 100px; }
     .dashboard #messages .message {
       padding-left: 3%;
       margin-top: 10px; }

@@ -126,6 +126,9 @@
             document.getElementById('messages').scrollTo(0, 999999999);
          }
       });
+
+      $('.mic').on('click', e => clickMic(e));
+      $('.stop').on('click', e => clickStop(e));
    });
 
    function updateGoButton () {
@@ -179,5 +182,41 @@
       $('span.departure').text(departureTime);
       $('span.arrival').text(arrivalTime);
       $('span.timeleft').text(`${hours} Hour${hours == 1 ? '' : 's'}, ${minutes} Minute${minutes == 1 ? '' : 's'}`);
+   }
+
+   let recorder;
+
+   function clickMic (e) {
+      console.log('click');
+      navigator.mediaDevices.getUserMedia({
+         audio: true
+      }).then(async function(stream) {
+         recorder = RecordRTC(stream, {
+            type: 'audio',
+         });
+         recorder.startRecording();
+      });
+      $('.stop').css('display', 'inline');
+      $('.mic').css('display', 'none');
+   }
+
+   function clickStop (e) {
+      recorder.stopRecording(function() {
+         let blob = recorder.getBlob();
+         var fd = new FormData();
+         fd.append('data', blob);
+         $.ajax({
+            type: 'POST',
+            url: 'http://localhost:32100/speech/',
+            data: fd,
+            processData: false,
+            contentType: false
+         }).done(function(data) {
+            data = JSON.parse(data);
+            $('#chat').val(data.privText);
+         });
+         $('.mic').css('display', 'inline');
+         $('.stop').css('display', 'none');
+      });
    }
 })();

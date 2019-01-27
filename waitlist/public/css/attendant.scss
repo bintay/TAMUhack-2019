@@ -150,6 +150,7 @@ body {
    #messages {
       overflow-y: scroll;
       height: 80%;
+      min-height: 100px;
    }
 
    .message {
@@ -176,6 +177,7 @@ body {
    .scrollV {
       overflow-y: scroll;
       height: 80%;
+      min-height: 100px;
    }
 
    .contact, .contacts {

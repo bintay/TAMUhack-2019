@@ -2600,7 +2600,7 @@ body {
       clear: both; }
   .dashboard #messages {
     overflow-y: scroll;
-    height: 80%;
+    height: 500px;
     min-height: 100px; }
   .dashboard .message {
     padding-left: 3%;
@@ -2619,7 +2619,7 @@ body {
       vertical-align: middle; }
   .dashboard .scrollV {
     overflow-y: scroll;
-    height: 80%;
+    height: 400px;
     min-height: 100px; }
   .dashboard .contact, .dashboard .contacts {
     overflow: hidden;

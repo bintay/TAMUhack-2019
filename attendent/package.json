@@ -1,17 +1,19 @@
 {
   "name": "upayan-mathkari",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-     "watch": "nodemon server.js -e js,pug", 
-    "start": "node server.js" 
+    "watch": "nodemon server.js -e js,pug",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
+    "microsoft-cognitiveservices-speech-sdk": "^1.2.1",
     "morgan": "^1.9.1",
     "pug": "^2.0.3"
-  }
+  },
+  "keywords": [],
+  "description": ""
 }

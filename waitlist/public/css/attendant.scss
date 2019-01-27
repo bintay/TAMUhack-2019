@@ -173,6 +173,11 @@ body {
       }
    }
 
+   .scrollV {
+      overflow-y: scroll;
+      height: 80%;
+   }
+
    .contact, .contacts {
       overflow: hidden;
       background: #fff;
@@ -189,8 +194,20 @@ body {
          font-family: $littleFont;
          width: calc(100% - 20px);
          text-align: center;
-         padding: 10px;
+         padding: 10px 10px 20px 10px;
          cursor: pointer;
+
+         &::before {
+            display: block;
+            background: #0000;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            position: relative;
+            top: 15px;
+            left: 40px;
+            content: "";
+         }
 
          &.alert::before {
             display: block;

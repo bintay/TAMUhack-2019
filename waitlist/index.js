@@ -93,18 +93,19 @@ io.on('connection', function (socket) {
    socket.on('message', function (data) {
       data = JSON.parse(data);
       translate('en', data.text, function (error, response, body) {
-         console.log(body[0]);
          data.text = body[0].translations[0].text;
          languageInSeat[data.seat] = body[0].detectedLanguage.language;
-         io.emit('message', JSON.stringify(data));
+         cateogrize(data.text, function (err, res, body) {
+            data.category = body.topScoringIntent ? body.topScoringIntent.intent : null;
+            data.sentiment = body.sentimentAnalysis ? body.sentimentAnalysis.score : null;
+            io.emit('message', JSON.stringify(data));
+         });
       });
    });
 
    socket.on('response', function (data) {
       data = JSON.parse(data);
-      console.log(languageInSeat, data.seat);
       translate(languageInSeat[data.seat] || 'en', data.text, function (error, response, body) {
-         console.log(body[0]);
          data.text = body[0].translations[0].text;
          io.emit('response', JSON.stringify(data));
       });
@@ -130,17 +131,24 @@ function translate (to, text, callback) {
 }
 
 /*
-function cateogrize (to, text, callback) {
+Categories
+Food/Drink
+Noise
+None
+Technical/Malfunction
+Temperature
+Weather.GetForecast
+*/
+function cateogrize (text, callback) {
    request({
-         url: 'https://westus.api.cognitive.microsoft.com/luis/api/v2.0/apps/66740d92-7d1a-4102-91aa-bfb7ab3b6074/',
-         method: 'GET',
+         url: 'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/66740d92-7d1a-4102-91aa-bfb7ab3b6074',
+         method: 'POST',
          headers: {'Ocp-Apim-Subscription-Key': '55895b3735164c00a1e958dc51b642c1'},
-         json: [{'Text': text}]
+         json: text
       }, function(error, response, body){
          callback(error, response, body);
    });
 }
-*/
 
 // Start the server
 http.listen(PORT, function () {

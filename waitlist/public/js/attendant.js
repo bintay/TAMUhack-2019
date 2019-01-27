@@ -29,12 +29,11 @@
 
       socket.on('message', function (data) {
          data = JSON.parse(data);
-         console.log(data);
          if (data.flight == flightNumber) {
             if (!users.has(data.seat)) {
                users.add(data.seat);
                $('.contacts').append('<div class="customer c-' + data.seat +'">' + data.seat + '</div>');
-               $('.contact').append('<div id="messages-' + data.seat + '" style="display: none"></div>');
+               $('.contact').append('<div class="scrollV" id="messages-' + data.seat + '" style="display: none"></div>');
 
                $('.customer').on('click', function (e) {
                   console.log(e);
@@ -49,14 +48,26 @@
                });
             }
             $('.customer.c-' + data.seat).addClass('alert');
-            $('#messages-' + data.seat).append('<div class="message"><p><img src=\'/public/images/user.png\' /> ' + data.text + '</p></div>');
-            document.getElementById('messages').scrollTo(0, document.body.scrollHeight);
+            
+            let emojies = '';
+            
+            if (data.sentiment < 0.3) emojies += '😡';
+            else if (data.sentiment > 0.7) emojies += '🙂';
+
+            if (data.category == 'Food/Drink') emojies += '🍔';
+            else if (data.category == 'Noise') emojies += '🔊';
+            else if (data.category == 'Technical/Malfunction')  emojies += '🛠';
+            else if (data.category == 'Temperature') emojies += '🌡';
+
+            $('#messages-' + data.seat).append('<div class="message"><p><img src=\'/public/images/user.png\' /> ' + data.text + '&nbsp;&nbsp;&nbsp;(' + (emojies.length > 0 ? emojies : '💭') + ')' + '</p></div>');
+            document.getElementById('messages-' + data.seat).scrollTo(0, 99999999);
          }
       });
 
       $('#send').on('click', e => {
          if (currentUser != null) {
             $('#messages-' + currentUser).append('<div class="message"><p><img src=\'/public/images/attendant.png\' /> ' + $('#chat').val() + '</p></div>');
+            document.getElementById('messages-' + currentUser).scrollTo(0, 99999999);
             socket.emit('response', JSON.stringify({'seat': currentUser, 'flight': flightNumber, 'text': $('#chat').val()}));
          }
       });

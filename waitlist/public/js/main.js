@@ -105,7 +105,7 @@
             console.log(data);
             if (data.flight == flightNumber && data.seat == seat) {
                $('#messages').append('<div class="message"><p><img src=\'/public/images/attendant.png\' /> ' + data.text + '</p></div>');
-               document.getElementById('messages').scrollTo(0, document.body.scrollHeight);
+               document.getElementById('messages').scrollTo(0, 999999999);
             }
          }
       });
@@ -123,7 +123,7 @@
                flight: flightNumber,
                seat: seat
             }));
-            document.getElementById('messages').scrollTo(0, document.body.scrollHeight);
+            document.getElementById('messages').scrollTo(0, 999999999);
          }
       });
    });

@@ -2616,6 +2616,9 @@ body {
       font-size: 20px;
       line-height: 20px;
       vertical-align: middle; }
+  .dashboard .scrollV {
+    overflow-y: scroll;
+    height: 80%; }
   .dashboard .contact, .dashboard .contacts {
     overflow: hidden;
     background: #fff;
@@ -2629,8 +2632,18 @@ body {
       font-family: "Quicksand", sans-serif;
       width: calc(100% - 20px);
       text-align: center;
-      padding: 10px;
+      padding: 10px 10px 20px 10px;
       cursor: pointer; }
+      .dashboard .contact .customer::before, .dashboard .contacts .customer::before {
+        display: block;
+        background: #0000;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        position: relative;
+        top: 15px;
+        left: 40px;
+        content: ""; }
       .dashboard .contact .customer.alert::before, .dashboard .contacts .customer.alert::before {
         display: block;
         background: #961235;

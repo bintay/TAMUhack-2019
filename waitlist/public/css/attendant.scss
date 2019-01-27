@@ -103,8 +103,8 @@ body {
    z-index: 1;
    display: none;
    //display: grid;
-   grid-template-columns: 10% 37.5% 5% 37.5% 10%;
-   grid-template-rows: 5vh 42.5vh 5vh 42.5vh 5vh;
+   grid-template-columns: 5% 20% 5% 65% 5%;
+   grid-template-rows: 5vh 90vh 5vh;
 
    p, label {
       font-family: $littleFont;
@@ -116,49 +116,15 @@ body {
       font-size: 30px;
    }
 
-   .button {
-      display: block;
-      padding: 10px;
-      margin: 0 auto;
-      background: #222;
-      color: #fff;
-      text-align: center;
-      transition: background 0.3s;
-      cursor: pointer;
-
-      &:hover {
-         background: $background;
-      }
-   }
-
-   .info, .contact, .bathroom {
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #0005;
-      padding: 20px;
-
-      .label {
-         display: inline-block;
-         width: 200px;
-      }
-   }
-
    #textbox {
       width: 100%;
 
       #chat {
          display: block;
          float: left;
-         width: 70%;
+         width: 80%;
          margin: 0 2%;
          padding: 10px;
-      }
-
-      i {
-         float: left;
-         margin-right: 2%;
-         margin-top: 4px;
-         font-size: 30px;
       }
 
       #send {
@@ -185,45 +151,92 @@ body {
       overflow-y: scroll;
       height: 80%;
       min-height: 100px;
+   }
 
-      .message {
-         padding-left: 3%;
-         margin-top: 10px;
-         
-         img {
-            width: 40px;
-            height: 40px;
+   .message {
+      padding-left: 3%;
+      margin-top: 10px;
+      
+      img {
+         width: 40px;
+         height: 40px;
+         border-radius: 50%;
+         box-shadow: 0 0 3px #0008;
+         position: relative;
+         top: 10px;
+         margin-right: 10px;
+      }
+
+      p {
+         font-size: 20px;
+         line-height: 20px;
+         vertical-align: middle;
+      }
+   }
+
+   .scrollV {
+      overflow-y: scroll;
+      height: 80%;
+      min-height: 100px;
+   }
+
+   .contact, .contacts {
+      overflow: hidden;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #0005;
+      padding: 20px 0;
+
+      .label {
+         display: inline-block;
+         width: 200px;
+      }
+
+      .customer {
+         font-family: $littleFont;
+         width: calc(100% - 20px);
+         text-align: center;
+         padding: 10px 10px 20px 10px;
+         cursor: pointer;
+
+         &::before {
+            display: block;
+            background: #0000;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            box-shadow: 0 0 3px #0008;
             position: relative;
-            top: 10px;
-            margin-right: 10px;
+            top: 15px;
+            left: 40px;
+            content: "";
          }
 
-         p {
-            font-size: 20px;
-            line-height: 20px;
-            vertical-align: middle;
+         &.alert::before {
+            display: block;
+            background: #961235;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            position: relative;
+            top: 15px;
+            left: 40px;
+            content: "";
+         }
+
+         &:hover {
+            background: #ddd;
          }
       }
    }
 
-   .info {
-      grid-column-start: 2;
-      grid-column-end: 3;
-      grid-row: 2;
-   }
-
    .contact {
-      grid-column-start: 2;
-      grid-column-end: 5;
-      grid-row: 4;
-      overflow: hidden;
+      grid-column: 4;
+      grid-row: 2;
+      padding: 20px;
    }
 
-   .bathroom {
-      grid-column-start: 4;
-      grid-column-end: 5;
+   .contacts {
+      grid-column: 2;
       grid-row: 2;
    }
 }

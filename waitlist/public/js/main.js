@@ -94,7 +94,41 @@
       });
 
       updateWaitTime(flightNumber);
-      setInterval(() => { updateWaitTime(flightNumber); }, 5000)
+      setInterval(() => { updateWaitTime(flightNumber); }, 5000);
+
+      var socket = io('http://localhost:32100/');
+
+      socket.on('response', function (data) {
+         let seat = $('#seatNumber').val();
+         if (seat.length > 0) {
+            data = JSON.parse(data);
+            console.log(data);
+            if (data.flight == flightNumber && data.seat == seat) {
+               $('#messages').append('<div class="message"><p><img src=\'/public/images/attendant.png\' /> ' + data.text + '</p></div>');
+               document.getElementById('messages').scrollTo(0, 999999999);
+            }
+         }
+      });
+
+      $('#send').on('click', e => {
+         let seat = $('#seatNumber').val();
+         let msg = $('#chat').val();
+         if (seat.length <= 0) {
+            $('#seatNumber').addClass('animated shake');
+            setTimeout(() => { $('#seatNumber').removeClass('animated shake'); }, 1000);
+         } else if (msg.length > 0) {
+            $('#messages').append('<div class="message"><p><img src=\'/public/images/user.png\' /> ' + msg + '</p></div>');
+            socket.emit('message', JSON.stringify({
+               text: $('#chat').val(),
+               flight: flightNumber,
+               seat: seat
+            }));
+            document.getElementById('messages').scrollTo(0, 999999999);
+         }
+      });
+
+      $('.mic').on('click', e => clickMic(e));
+      $('.stop').on('click', e => clickStop(e));
    });
 
    function updateGoButton () {
@@ -148,5 +182,41 @@
       $('span.departure').text(departureTime);
       $('span.arrival').text(arrivalTime);
       $('span.timeleft').text(`${hours} Hour${hours == 1 ? '' : 's'}, ${minutes} Minute${minutes == 1 ? '' : 's'}`);
+   }
+
+   let recorder;
+
+   function clickMic (e) {
+      console.log('click');
+      navigator.mediaDevices.getUserMedia({
+         audio: true
+      }).then(async function(stream) {
+         recorder = RecordRTC(stream, {
+            type: 'audio',
+         });
+         recorder.startRecording();
+      });
+      $('.stop').css('display', 'inline');
+      $('.mic').css('display', 'none');
+   }
+
+   function clickStop (e) {
+      recorder.stopRecording(function() {
+         let blob = recorder.getBlob();
+         var fd = new FormData();
+         fd.append('data', blob);
+         $.ajax({
+            type: 'POST',
+            url: 'http://localhost:32100/speech/',
+            data: fd,
+            processData: false,
+            contentType: false
+         }).done(function(data) {
+            data = JSON.parse(data);
+            $('#chat').val(data.privText);
+         });
+         $('.mic').css('display', 'inline');
+         $('.stop').css('display', 'none');
+      });
    }
 })();

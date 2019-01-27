@@ -2624,7 +2624,7 @@ body {
       clear: both; }
   .dashboard #messages {
     overflow-y: scroll;
-    height: 80%;
+    height: 300px;
     min-height: 100px; }
     .dashboard #messages .message {
       padding-left: 3%;

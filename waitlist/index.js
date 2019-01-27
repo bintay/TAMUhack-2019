@@ -24,8 +24,6 @@ app.get('/', function (req, res) {
 
 let flights = {};
 
-setInterval(() => {console.log(flights);}, 1000)
-
 app.get('/bathroom/wait/:flight/:seat', function (req, res) {
    res.setHeader('Content-Type', 'application/json');
    let index = -1;

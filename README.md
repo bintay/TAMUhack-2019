@@ -4,7 +4,9 @@ Built in 24 Hours
 
 ## Demo (only January 27, 2019)
 Passenger Interface - http://157.230.160.205/
+
 Attendant Interface - http://157.230.160.205/attendant/
+
 Use example flight code `8928`
 
 
@@ -79,31 +81,31 @@ working on incorporating IoT devices to interact with the restroom queue
 in the works to improve flight attendant efficiency. 
 
 ## Built With
-sass
-pug
-node.js
-mongodb
-html5
-css
-azure
-microsoft-translator
-natural-language-processing
-sentiment-analysis-online
-openweathermap
-american-airlines-api
-express.js
-javascript
-jquery
-microsoft-cognitive-services
-microsoft-speech-to-text
-socket.io
-airport-code-api
-git
-github
-google-fonts
-font-awesome
-zsh
-ffmpeg
-digitalocean
-domain.com
-microsoft-luis
+- sass
+- pug
+- node.js
+- mongodb
+- html5
+- css
+- azure
+- microsoft-translator
+- natural-language-processing
+- sentiment-analysis-online
+- openweathermap
+- american-airlines-api
+- express.js
+- javascript
+- jquery
+- microsoft-cognitive-services
+- microsoft-speech-to-text
+- socket.io
+- airport-code-api
+- git
+- github
+- google-fonts
+- font-awesome
+- zsh
+- ffmpeg
+- digitalocean
+- domain.com
+- microsoft-luis

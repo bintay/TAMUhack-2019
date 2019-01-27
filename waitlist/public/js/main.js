@@ -94,7 +94,38 @@
       });
 
       updateWaitTime(flightNumber);
-      setInterval(() => { updateWaitTime(flightNumber); }, 5000)
+      setInterval(() => { updateWaitTime(flightNumber); }, 5000);
+
+      var socket = io('http://localhost:32100/');
+
+      socket.on('response', function (data) {
+         let seat = $('#seatNumber').val();
+         if (seat.length > 0) {
+            data = JSON.parse(data);
+            console.log(data);
+            if (data.flight == flightNumber && data.seat == seat) {
+               $('#messages').append('<div class="message"><p><img src=\'/public/images/attendant.png\' /> ' + data.text + '</p></div>');
+               document.getElementById('messages').scrollTo(0, document.body.scrollHeight);
+            }
+         }
+      });
+
+      $('#send').on('click', e => {
+         let seat = $('#seatNumber').val();
+         let msg = $('#chat').val();
+         if (seat.length <= 0) {
+            $('#seatNumber').addClass('animated shake');
+            setTimeout(() => { $('#seatNumber').removeClass('animated shake'); }, 1000);
+         } else if (msg.length > 0) {
+            $('#messages').append('<div class="message"><p><img src=\'/public/images/user.png\' /> ' + msg + '</p></div>');
+            socket.emit('message', JSON.stringify({
+               text: $('#chat').val(),
+               flight: flightNumber,
+               seat: seat
+            }));
+            document.getElementById('messages').scrollTo(0, document.body.scrollHeight);
+         }
+      });
    });
 
    function updateGoButton () {

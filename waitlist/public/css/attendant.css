@@ -2569,33 +2569,14 @@ body {
 .dashboard {
   z-index: 1;
   display: none;
-  grid-template-columns: 10% 37.5% 5% 37.5% 10%;
-  grid-template-rows: 5vh 42.5vh 5vh 42.5vh 5vh; }
+  grid-template-columns: 5% 20% 5% 65% 5%;
+  grid-template-rows: 5vh 90vh 5vh; }
   .dashboard p, .dashboard label {
     font-family: "Quicksand", sans-serif; }
   .dashboard h2 {
     font-family: "Major Mono Display", monospace;
     padding-bottom: 30px;
     font-size: 30px; }
-  .dashboard .button {
-    display: block;
-    padding: 10px;
-    margin: 0 auto;
-    background: #222;
-    color: #fff;
-    text-align: center;
-    transition: background 0.3s;
-    cursor: pointer; }
-    .dashboard .button:hover {
-      background: #4fc3f7; }
-  .dashboard .info, .dashboard .contact, .dashboard .bathroom {
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px #0005;
-    padding: 20px; }
-    .dashboard .info .label, .dashboard .contact .label, .dashboard .bathroom .label {
-      display: inline-block;
-      width: 200px; }
   .dashboard #textbox {
     width: 100%; }
     .dashboard #textbox #chat {
@@ -2620,33 +2601,54 @@ body {
   .dashboard #messages {
     overflow-y: scroll;
     height: 80%; }
-    .dashboard #messages .message {
-      padding-left: 3%;
-      margin-top: 10px; }
-      .dashboard #messages .message img {
-        width: 40px;
-        height: 40px;
+  .dashboard .message {
+    padding-left: 3%;
+    margin-top: 10px; }
+    .dashboard .message img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      box-shadow: 0 0 3px #0008;
+      position: relative;
+      top: 10px;
+      margin-right: 10px; }
+    .dashboard .message p {
+      font-size: 20px;
+      line-height: 20px;
+      vertical-align: middle; }
+  .dashboard .contact, .dashboard .contacts {
+    overflow: hidden;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #0005;
+    padding: 20px 0; }
+    .dashboard .contact .label, .dashboard .contacts .label {
+      display: inline-block;
+      width: 200px; }
+    .dashboard .contact .customer, .dashboard .contacts .customer {
+      font-family: "Quicksand", sans-serif;
+      width: calc(100% - 20px);
+      text-align: center;
+      padding: 10px;
+      cursor: pointer; }
+      .dashboard .contact .customer.alert::before, .dashboard .contacts .customer.alert::before {
+        display: block;
+        background: #961235;
+        width: 10px;
+        height: 10px;
         border-radius: 50%;
-        box-shadow: 0 0 3px #0008;
         position: relative;
-        top: 10px;
-        margin-right: 10px; }
-      .dashboard #messages .message p {
-        font-size: 20px;
-        line-height: 20px;
-        vertical-align: middle; }
-  .dashboard .info {
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row: 2; }
+        top: 15px;
+        left: 40px;
+        content: ""; }
+      .dashboard .contact .customer:hover, .dashboard .contacts .customer:hover {
+        background: #ddd; }
   .dashboard .contact {
-    grid-column-start: 2;
-    grid-column-end: 5;
-    grid-row: 4;
-    overflow: hidden; }
-  .dashboard .bathroom {
-    grid-column-start: 4;
-    grid-column-end: 5;
+    grid-column: 4;
+    grid-row: 2;
+    padding: 20px; }
+  .dashboard .contacts {
+    grid-column: 2;
     grid-row: 2; }
 
 @keyframes rightToLeft {

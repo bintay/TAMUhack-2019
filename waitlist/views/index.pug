@@ -36,7 +36,15 @@ html
             br
             p <span class='label'>Weather in <span class='cityTo'></span></span><span class='weatherTo'></span>
          .contact
-            p TEMP CONTACT HERE
+            #textbox
+               input#chat(type='text', name='chat', value='', placeholder='Need anything? Let us know.')
+               p#send send
+            .clear
+            #messages
+               .message
+                  p 
+                     img(src='public/images/attendant.png') 
+                     | Hi! I'm Gabriela. Let me know if you need anything!
          .bathroom
             h2 bathroom
             label.label Seat
@@ -47,6 +55,7 @@ html
             br
             p.button.queue Join queue
       script(src="https://code.jquery.com/jquery-3.3.1.min.js", integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=", crossorigin="anonymous")
+      script(src="public/js/socket.io.js")
       script(src="/public/js/air-port-codes-api-min.js")
       script(src='/public/js/main.js')
 

@@ -2,7 +2,7 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-@import url("https://fonts.googleapis.com/css?family=Major+Mono+Display");
+@import url("https://fonts.googleapis.com/css?family=Major+Mono+Display|Quicksand");
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -2484,7 +2484,8 @@ body {
   height: 100vh; }
 
 .background {
-  position: absolute; }
+  position: absolute;
+  z-index: -99; }
   .background i {
     text-shadow: 0 0 5px #0072; }
   .background i.fa-cloud {
@@ -2532,11 +2533,12 @@ body {
     top: 400px; }
 
 .center {
+  z-index: 1;
   text-align: center;
   margin: 0 auto;
   padding-top: 100px;
   width: 100%; }
-  .center h1 {
+  .center h1, .center a {
     color: #fafafa;
     font-family: "Major Mono Display", monospace;
     font-size: 60px; }
@@ -2547,7 +2549,8 @@ body {
     border: none;
     outline: none;
     width: 200px;
-    font-size: 60px; }
+    font-size: 60px;
+    text-align: center; }
   .center #submit {
     cursor: pointer;
     display: none;
@@ -2555,6 +2558,33 @@ body {
     transition: text-shadow 0.3s; }
     .center #submit:hover {
       text-shadow: 0 0 20px #0078; }
+
+.error {
+  z-index: 1;
+  display: none; }
+
+.dashboard {
+  z-index: 1;
+  display: none;
+  grid-template-columns: 10% 37.5% 5% 37.5% 10%;
+  grid-template-rows: 5vh 42.5vh 5vh 42.5vh 5vh; }
+  .dashboard p {
+    font-family: "Quicksand", sans-serif; }
+  .dashboard .info {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row: 2; }
+    .dashboard .info .label {
+      display: inline-block;
+      width: 150px; }
+  .dashboard .contact {
+    grid-column-start: 2;
+    grid-column-end: 5;
+    grid-row: 4; }
+  .dashboard .bathroom {
+    grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row: 2; }
 
 @keyframes rightToLeft {
   0% {

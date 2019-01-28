@@ -1,19 +1,11 @@
 # TAMUhack-2019
 
-Built in 24 Hours
+Built in 24 Hours.
 
-## Demo (only January 27, 2019)
-Passenger Interface - http://157.230.160.205/
-
-Attendant Interface - http://157.230.160.205/attendant/
-
-Use example flight code `8928`
-
+To use, the [American Airlines](https://github.com/AmericanAirlines/AA-Mock-Engine) mock engine must be running. URLs in the code might need to be changed depending on the host. You will also need access to microsoft's cogative service API as the codes used here are only available for a short time after TAMUhack (January 27th).
 
 ## Inspiration
 Having been on long flights, we became aware of the many inefficiencies of in-flight communication.
-
-
 
 ## What it does
 Our platform provides a web-based chat portal that allows passengers 

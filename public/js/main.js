@@ -19,7 +19,7 @@
       let date = new Date();
       let dateString = date.toISOString().substring(0, 10);
       let flightNumber = $('#flightNumber').val();
-      $.ajax(`http://localhost:3030/flight?flightNumber=${flightNumber}&date=${dateString}`).done((flight) => {
+      $.ajax(`http://138.68.253.44:3030/flight?flightNumber=${flightNumber}&date=${dateString}`).done((flight) => {
          let apcmFrom = new apc('single', {key : 'afc1687c79', secret: '1359a92bfb15320'});
          let apcmTo = new apc('single', {key : 'afc1687c79', secret: '1359a92bfb15320'});
 
@@ -75,7 +75,7 @@
                $('#seatNumber').addClass('animated shake');
                setTimeout(() => { $('#seatNumber').removeClass('animated shake'); }, 1000);
             } else {
-               $.post(`http://localhost:32100/bathroom/add/${flightNumber}/${seat}`, (data) => {
+               $.post(`http://138.68.253.44/bathroom/add/${flightNumber}/${seat}`, (data) => {
                   $('.button.queue').text('Exit queue');
                });
             }
@@ -85,7 +85,7 @@
                $('#seatNumber').addClass('animated shake');
                setTimeout(() => { $('#seatNumber').removeClass('animated shake'); }, 1000);
             } else {
-               $.post(`http://localhost:32100/bathroom/remove/${flightNumber}/${seat}`, (data) => {
+               $.post(`http://138.68.253.44/bathroom/remove/${flightNumber}/${seat}`, (data) => {
                   $('.button.queue').text('Join queue');
                });
             }
@@ -96,7 +96,7 @@
       updateWaitTime(flightNumber);
       setInterval(() => { updateWaitTime(flightNumber); }, 5000);
 
-      var socket = io('http://localhost:32100/');
+      var socket = io('http://138.68.253.44/');
 
       socket.on('response', function (data) {
          let seat = $('#seatNumber').val();
@@ -146,7 +146,7 @@
       if (seat == null || seat.length == 0) {
          seat = '***';
       }
-      $.get(`http://localhost:32100/bathroom/wait/${flightNumber}/${seat}`, (data) => {
+      $.get(`http://138.68.253.44/bathroom/wait/${flightNumber}/${seat}`, (data) => {
          if (data.time == '0' && $('.button.queue').text() == 'Exit queue') {
             alert('IT\'S POTTY TIME 💩');
             $('.button.queue').text('I\'m done!');
@@ -207,7 +207,7 @@
          fd.append('data', blob);
          $.ajax({
             type: 'POST',
-            url: 'http://localhost:32100/speech/',
+            url: 'http://138.68.253.44/speech/',
             data: fd,
             processData: false,
             contentType: false

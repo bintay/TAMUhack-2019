@@ -6,7 +6,7 @@
       $('.home').addClass('animated zoomOut');
       let flightNumber = $('#flightNumber').val();
       let dateString = (new Date()).toISOString().substring(0, 10);
-      $.ajax(`http://localhost:3030/flight?flightNumber=${flightNumber}&date=${dateString}`).done((flight) => {
+      $.ajax(`http://138.68.253.44:3030/flight?flightNumber=${flightNumber}&date=${dateString}`).done((flight) => {
          setTimeout(() => {
             $('.home').remove();
             $('.dashboard').addClass('animated zoomIn');
@@ -22,7 +22,7 @@
          }, 1000);
       });
 
-      var socket = io('http://localhost:32100/');
+      var socket = io('http://138.68.253.44/');
 
       let users = new Set();
       let currentUser = null;
